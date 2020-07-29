@@ -30,7 +30,7 @@ int main()
     }
 
     // ensure that main does not return before the threads are finished
-    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(1));
     std::cout << "End of main is reached \n";
     return 0;
 }
