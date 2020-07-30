@@ -41,5 +41,6 @@
         "thread": "cpp",
         "utility": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "editor.mouseWheelZoom": true
 }
