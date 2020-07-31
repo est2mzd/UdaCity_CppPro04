@@ -15,9 +15,11 @@ int main()
 
     // starting thread
     std::thread t(printName, std::ref(name), 50);
+  //std::thread t2(printName, &name, 50);         // compile error
 
     // wait for thread before returning
     t.join();
+  //t2.join();
 
     // print name from main
     name += " (from Main)";
