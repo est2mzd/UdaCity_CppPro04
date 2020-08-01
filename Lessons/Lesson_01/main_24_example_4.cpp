@@ -18,17 +18,22 @@ private:
 int main()
 {
     // create thread
-    Vehicle v1, v2;
-    std::thread t1 = std::thread(&Vehicle::addID,  v1, 1); // call member function on object v
-    std::thread t2 = std::thread(&Vehicle::addID, &v2, 2); // call member function on object v
+    Vehicle v1, v2, v3;
+
+     // call member function on object v
+    std::thread t1 = std::thread(&Vehicle::addID,  v1, 1);
+    std::thread t2 = std::thread(&Vehicle::addID, &v2, 2);
+  //std::thread t3 = std::thread(&Vehicle::addID, std::ref(v3), 5);// compile error
 
     // wait for thread to finish
     t1.join();
     t2.join();
+  //t3.join();
 
     // print Vehicle id
     v1.printID();
     v2.printID();
+  //v3.printID();
 
     return 0;
 }
