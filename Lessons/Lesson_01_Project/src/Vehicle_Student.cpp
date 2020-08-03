@@ -30,8 +30,9 @@ void Vehicle::simulate()
     // my code
     // format => std::thread(&class_func, &class_instance, arguments)
     // &this -> compile error
-    // "this" is shared_ptr, so we must use "shared_from_this" 
-    if(1)
+    // "this" is shared_ptr, so we must use "shared_from_this"
+    std::cout << "call Vehicle::simulate()" << std::endl; 
+    if(0)
     {
         // answer -1
         std::thread t = std::thread(&Vehicle::drive, this->shared_from_this());
