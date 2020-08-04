@@ -1,4 +1,4 @@
-// g++ -pthread -std=c++11 XXX.cpp
+// g++ -pthread -std=c++11 XXXYYY.cpp
 #include <iostream>
 #include <thread>
 #include <string>
