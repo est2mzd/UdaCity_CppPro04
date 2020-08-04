@@ -22,6 +22,14 @@ TrafficObject.h
 TrafficObject.h
 /home/takuya/work/UdaCity_CppPro04/Lessons/Lesson_01_Project/src/TrafficObject.h
 
+/home/takuya/work/UdaCity_CppPro04/Lessons/Lesson_01_Project/src/TrafficObject.cpp
+iostream
+-
+chrono
+-
+TrafficObject.h
+/home/takuya/work/UdaCity_CppPro04/Lessons/Lesson_01_Project/src/TrafficObject.h
+
 /home/takuya/work/UdaCity_CppPro04/Lessons/Lesson_01_Project/src/TrafficObject.h
 vector
 -
