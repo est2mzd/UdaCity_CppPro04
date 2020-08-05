@@ -15,11 +15,11 @@ void checkResult(std::future<double> &&frt)
     auto status = frt.wait_for(std::chrono::milliseconds(1000));
     if (status == std::future_status::ready)
     {
-        std::cout << "Result_1 = " << frt.get() << std::endl;
+        std::cout << "Result = " << frt.get() << std::endl;
     }
     else if (status == std::future_status::timeout || status == std::future_status::deferred)
     {
-        std::cout << "Result_1 unavailable" << std::endl;
+        std::cout << "Result unavailable" << std::endl;
     }
 }
 
