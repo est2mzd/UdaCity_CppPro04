@@ -38,6 +38,7 @@ int main()
     }
     catch(std::runtime_error e)
     {
+        std::cout << "Error !" << std::endl;
         std::cerr << e.what() << '\n';
     }
 
