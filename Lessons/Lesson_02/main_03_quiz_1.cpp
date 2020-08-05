@@ -54,5 +54,4 @@ int main()
     t_2.join();
 
     return 0;
-    
 }
