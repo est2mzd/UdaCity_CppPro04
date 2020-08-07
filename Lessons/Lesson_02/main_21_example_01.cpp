@@ -37,6 +37,7 @@ int main()
         [](Vehicle v){
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             v.setID(2);
+            std::cout << "Vehicle #" << v.getID() << " in Thread()" << std::endl;
         },
         // argument
         v0
