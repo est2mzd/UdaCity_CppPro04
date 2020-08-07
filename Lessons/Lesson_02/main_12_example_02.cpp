@@ -28,7 +28,7 @@ int main()
     // synchoronously
     std::future<double> ftr = std::async(std::launch::deferred, divideByNumber, num, denom);
 
-    // asynchoronously
+    // asynchoronously  
     // std::future<double> ftr = std::async(std::launch::async , divideByNumber, num, denom);
 
     // retrieve result within try-catch-block
