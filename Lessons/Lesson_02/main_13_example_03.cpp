@@ -30,8 +30,9 @@ int main()
     int nLoops = 10, nThreads = 5;
     for (int i = 0; i < nThreads; i++)
     {
-     // futures.emplace_back(std::async(std::launch::any,   workerFunction, nLoops)); // compile error
-        futures.emplace_back(std::async(std::launch::async, workerFunction, nLoops));
+     // futures.emplace_back(std::async(std::launch::any,   workerFunction, nLoops));//compile error
+     // futures.emplace_back(std::async(std::launch::deferred, workerFunction, nLoops));//synchronous
+        futures.emplace_back(std::async(std::launch::async,    workerFunction, nLoops));//asynchronous
     }
 
     // wait for tasks to complete
