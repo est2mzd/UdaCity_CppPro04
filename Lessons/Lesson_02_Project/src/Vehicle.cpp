@@ -82,6 +82,8 @@ void Vehicle::drive()
                     _currDestination
                 );
 
+                ftr.wait();
+
                 // slow down and set intersection flag
                 _speed /= 10.0;
                 hasEnteredIntersection = true;
