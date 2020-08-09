@@ -37,8 +37,8 @@ public:
         _name = new std::string(src.getName());
 
         // invalidate src
-        src.setID(0);
-        src.setName("Default Name");
+        src.setID(-99);
+        src.setName("Default Name set by move()");
 
         std::cout << "Vehicle #" << _id << " move constructor called" << std::endl;
     }
@@ -66,8 +66,10 @@ int main()
         std::move(v0)
     );
 
-    v0.setName("Vehicle #3");
+    // v0.setName("Vehicle #3");
     ftr.wait();
-    std::cout << "Name of v0 : " << v0.getName() << " : in Main()"<< std::endl;
+    std::cout << "Vehicle #0" << std::endl;
+    std::cout << "  : ID   = " << v0.getID()   << std::endl;
+    std::cout << "  : Name = " << v0.getName() << std::endl;
     return 0;
 }
