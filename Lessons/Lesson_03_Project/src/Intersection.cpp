@@ -79,7 +79,7 @@ void Intersection::addVehicleToQueue(std::shared_ptr<Vehicle> vehicle)
     
     std::unique_lock<std::mutex> lock_u(_mtxCout); // Task L3.3 : lock
     std::cout << "Intersection #" << _id << "::addVehicleToQueue: thread id = " << std::this_thread::get_id() << std::endl;
-    lock_u.unlock(); // Task L3.3 : lock
+    lock_u.unlock(); // Task L3.3 : unlock
 
     // add new vehicle to the end of the waiting line
     std::promise<void> prmsVehicleAllowedToEnter;
@@ -91,7 +91,7 @@ void Intersection::addVehicleToQueue(std::shared_ptr<Vehicle> vehicle)
     
     lock_u.lock();   // Task L3.3 : lock
     std::cout << "Intersection #" << _id << ": Vehicle #" << vehicle->getID() << " is granted entry." << std::endl;
-    lock_u.unlock(); // Task L3.3 : lock
+    lock_u.unlock(); // Task L3.3 : unlock
 }
 
 void Intersection::vehicleHasLeft(std::shared_ptr<Vehicle> vehicle)
