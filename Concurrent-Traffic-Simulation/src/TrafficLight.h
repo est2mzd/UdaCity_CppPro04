@@ -46,7 +46,7 @@ public:
 
     // typical behaviour methods
     void waitForGreen(); // FP.1 
-    void Siimulate();    // FP.1 
+    void simulate();     // FP.1 
 
 private:
     // typical behaviour methods

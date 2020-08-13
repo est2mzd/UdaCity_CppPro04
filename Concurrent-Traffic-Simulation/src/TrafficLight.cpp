@@ -40,11 +40,16 @@ TrafficLightPhase TrafficLight::getCurrentPhase()
 {
     return _currentPhase;
 }
+*/
 
 void TrafficLight::simulate()
 {
-    // FP.2b : Finally, the private method „cycleThroughPhases“ should be started in a thread when the public method „simulate“ is called. To do this, use the thread queue in the base class. 
+    // FP.2b : Finally, the private method „cycleThroughPhases“ should be started in a thread 
+    // when the public method „simulate“ is called. To do this, use the thread queue in the base class. 
+    // launch drive function in a thread
+    threads.emplace_back(std::thread( &TrafficLight::cycleThroughPhases, this));
 }
+
 
 // virtual function which is executed in a thread
 void TrafficLight::cycleThroughPhases()
@@ -53,6 +58,45 @@ void TrafficLight::cycleThroughPhases()
     // and toggles the current phase of the traffic light between red and green and sends an update method 
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
+    std::chrono::high_resolution_clock::time_point t_1 = std::chrono::high_resolution_clock::now();
+    std::chrono::high_resolution_clock::time_point t_2 = std::chrono::high_resolution_clock::now();
+    int t_duration = 0;
+
+    // random engine
+    std::random_device seed;
+    std::mt19937 engine{seed()};
+    std::uniform_int_distribution<int> rand_dist(4000, 6000);
+
+    while(true)
+    {
+        // wait 1 ms
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+        // calc time duration
+        t_2 = std::chrono::high_resolution_clock::now();
+        t_duration += std::chrono::duration_cast<std::chrono::milliseconds> (t_2 - t_1).count();
+        t_1 = t_2;
+
+        if (t_duration < rand_dist(engine))
+            continue;
+
+        // guard the thread in oreder to modify the traffic light correctly
+        std::lock_guard<std::mutex> lock_g(_mutex);
+
+        // toggle the traffic light status
+        if(_currentPhase == TrafficLightPhase::red)
+        {
+            _currentPhase = TrafficLightPhase::green;
+            std::cout << "   Traffic Light ----> Green " << std::endl;
+        }
+        else
+        {
+            _currentPhase = TrafficLightPhase::red;
+            std::cout << "   Traffic Light ----> Red " << std::endl;
+        }
+
+        // send message
+        
+    }
 }
 
-*/
