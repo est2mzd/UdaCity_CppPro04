@@ -22,7 +22,7 @@ void MessageQueue<T>::send(T &&msg)
     // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
     std::lock_guard<std::mutex> lock_g(_mutex); // PF.4a
     _queue.push_back(std::move(msg));           // PF.4a
-    _condition.notify_noe();                    // PF.4a
+    _condition.notify_one();                    // PF.4a
 }
 
 // template void MessageQueue<TrafficLightPhase>(T &&msg);
@@ -104,6 +104,7 @@ void TrafficLight::cycleThroughPhases()
         }
 
         // send message
+        _messageQueue.send(std::move(_currentPhase)); // FP.2a & FP.4b
         
     }
 }
