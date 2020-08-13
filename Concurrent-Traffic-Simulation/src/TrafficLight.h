@@ -44,6 +44,7 @@ class TrafficLight : TrafficObject
 {
 public:
     // constructor / desctructor
+    TrafficLight(); // FP.5b
 
     // getters / setters
     TrafficLightPhase getCurrentPhase(); // FP.1 
