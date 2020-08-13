@@ -12,14 +12,21 @@ T MessageQueue<T>::receive()
     // to wait for and receive new messages and pull them from the queue using move semantics. 
     // The received object should then be returned by the receive function. 
 }
+*/
+
 
 template <typename T>
 void MessageQueue<T>::send(T &&msg)
 {
     // FP.4a : The method send should use the mechanisms std::lock_guard<std::mutex> 
     // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
+    std::lock_guard<std::mutex> lock_g(_mutex); // PF.4a
+    _queue.push_back(std::move(msg));           // PF.4a
+    _condition.notify_noe();                    // PF.4a
 }
-*/
+
+// template void MessageQueue<TrafficLightPhase>(T &&msg);
+
 
 /* Implementation of class "TrafficLight" */
 
@@ -58,8 +65,8 @@ void TrafficLight::cycleThroughPhases()
     // and toggles the current phase of the traffic light between red and green and sends an update method 
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
-    std::chrono::high_resolution_clock::time_point t_1 = std::chrono::high_resolution_clock::now();
-    std::chrono::high_resolution_clock::time_point t_2 = std::chrono::high_resolution_clock::now();
+    std::chrono::high_resolution_clock::time_point t_changed = std::chrono::high_resolution_clock::now();
+    std::chrono::high_resolution_clock::time_point t_updated = std::chrono::high_resolution_clock::now();
     int t_duration = 0;
 
     // random engine
@@ -73,9 +80,8 @@ void TrafficLight::cycleThroughPhases()
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
         // calc time duration
-        t_2 = std::chrono::high_resolution_clock::now();
-        t_duration += std::chrono::duration_cast<std::chrono::milliseconds> (t_2 - t_1).count();
-        t_1 = t_2;
+        t_updated  = std::chrono::high_resolution_clock::now();
+        t_duration = std::chrono::duration_cast<std::chrono::milliseconds> (t_updated - t_changed).count();
 
         if (t_duration < rand_dist(engine))
             continue;
@@ -88,11 +94,13 @@ void TrafficLight::cycleThroughPhases()
         {
             _currentPhase = TrafficLightPhase::green;
             std::cout << "   Traffic Light ----> Green " << std::endl;
+            t_changed = std::chrono::high_resolution_clock::now();
         }
         else
         {
             _currentPhase = TrafficLightPhase::red;
             std::cout << "   Traffic Light ----> Red " << std::endl;
+            t_changed = std::chrono::high_resolution_clock::now();
         }
 
         // send message
