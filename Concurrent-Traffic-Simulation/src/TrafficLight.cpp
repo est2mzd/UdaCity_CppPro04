@@ -85,6 +85,7 @@ void TrafficLight::cycleThroughPhases()
     std::random_device seed;
     std::mt19937 engine{seed()};
     std::uniform_int_distribution<int> rand_dist(4000, 6000);
+    int t_random_duration = rand_dist(engine);
 
     while(true)
     {
@@ -95,7 +96,7 @@ void TrafficLight::cycleThroughPhases()
         t_updated  = std::chrono::high_resolution_clock::now();
         t_duration = std::chrono::duration_cast<std::chrono::milliseconds> (t_updated - t_changed).count();
 
-        if (t_duration < rand_dist(engine))
+        if (t_duration < t_random_duration))
             continue;
 
         // guard the thread in oreder to modify the traffic light correctly
@@ -107,12 +108,14 @@ void TrafficLight::cycleThroughPhases()
             _currentPhase = TrafficLightPhase::green;
             std::cout << "   Traffic Light ----> Green " << std::endl;
             t_changed = std::chrono::high_resolution_clock::now();
+            t_random_duration = rand_dist(engine);
         }
         else
         {
             _currentPhase = TrafficLightPhase::red;
             std::cout << "   Traffic Light ----> Red " << std::endl;
             t_changed = std::chrono::high_resolution_clock::now();
+            t_random_duration = rand_dist(engine);
         }
 
         // send message
