@@ -96,7 +96,7 @@ void TrafficLight::cycleThroughPhases()
         t_updated  = std::chrono::high_resolution_clock::now();
         t_duration = std::chrono::duration_cast<std::chrono::milliseconds> (t_updated - t_changed).count();
 
-        if (t_duration < t_random_duration))
+        if (t_duration < t_random_duration)
             continue;
 
         // guard the thread in oreder to modify the traffic light correctly
