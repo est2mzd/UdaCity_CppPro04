@@ -1,3 +1,0 @@
-/home/takuya/work/UdaCity_CppPro04/Concurrent-Traffic-Simulation/build/CMakeFiles/rebuild_cache.dir
-/home/takuya/work/UdaCity_CppPro04/Concurrent-Traffic-Simulation/build/CMakeFiles/traffic_simulation.dir
-/home/takuya/work/UdaCity_CppPro04/Concurrent-Traffic-Simulation/build/CMakeFiles/edit_cache.dir
